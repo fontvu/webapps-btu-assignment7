@@ -1,6 +1,6 @@
 # webapps-btu-assignment7
 
-# BUSINESS DESCRIPTION #
+## BUSINESS DESCRIPTION ##
 
 AdventureShop
 
@@ -20,7 +20,7 @@ Customer Support: We understand that purchasing outdoor equipment can be overwhe
 
 Outdoor Workshops and Events: In addition to selling outdoor gear, we organize workshops and events to promote outdoor activities and provide educational opportunities. These workshops cover various topics such as hiking and camping skills, equipment maintenance, and safety guidelines. By fostering a sense of community, we aim to inspire and empower individuals to explore the outdoors confidently.
 
-# APP #
+## APP ##
 
 App Title: AdventureShop Pro
 
@@ -38,34 +38,40 @@ Customer Support and Communication: The app should include a customer support fe
 
 Event and Workshop Registration: To streamline our event organization process, the app should enable customers to register for workshops and events directly. It should save event details, dates, and have the option for customers to register for the event. 
 
-# TASKS #
+## **INFORMATION MANAGEMENT TASKS** ##
 
-Enter New Product Data: Add a new product to the product catalog by entering its ID, name, description, price, and availability status.
+- Enter New Product Data: Add a new product to the product catalog by entering its ID, name, description, price, and availability status.
 
-Update Product Data: Allow updating of all product data items except the product ID, including the name, description, price, and availability status.
+- Update Product Data: Allow updating of all product data items except the product ID, including the name, description, price, and availability status.
 
-View Product Catalog: Display a list of all products in the catalog, showing each product's ID, name, description, price, and availability status.
+- View Product Catalog: Display a list of all products in the catalog, showing each product's ID, name, description, price, and availability status.
 
-Enter New Customer Data: Register a new customer by entering their ID, name, phone number, and an empty list of purchased products.
+- Enter New Customer Data: Register a new customer by entering their ID, name, phone number.
 
-Update Customer Data: Allow updating of all customer data items except the customer ID, including the name, phone number, and list of purchased products.
+- Update Customer Data: Allow updating of all customer data items except the customer ID, including the name, phone number.
 
-View All Customers: Display the list of all details of customers, including their ID, name, phone number, and the list of purchased products.
+- View Customer Details: Display the details of a customer, including their ID, name, phone number, and the list of purchased products.
 
-Enter New Event Data: Add a new event or workshop by entering its ID, title, description, date, and an empty list of registered users.
+- Enter New Event Data: Add a new event or workshop by entering title, description, date, and an empty list of registered users. The event ID is automatically generated.
 
-Update Event Data: Allow updating of all event data items except the event ID, including the title, description, date, and the list of registered users.
+- Update Event Data: Allow updating of all event data items except the event ID, including the title, description, date, and the list of registered users.
 
-View All Events: Display the list of all details of events, including its ID, title, description, date, and the list of registered users.
+- View Event Details: Display the details of an event, including its ID, title, description, date, and the list of registered users.
 
-Product Purchase: Register a product purchase by a customer, updating the product's availability status and adding the product to the customer's list of purchased products.
+- Product Purchase: Register a product purchase by a customer, updating the product's availability status and adding the product to the customer's list of purchased products.
 
-Customer Registration for Event: Register a customer for an event, updating the event's list of registered users.
+- Customer Registration for Event: Register a customer for an event, updating the event's list of registered users.
 
-Check Product Availability: Allow users to check the availability status of a product by entering its ID.
+- Check Product Availability: Allow users to check the availability status of a product by entering its ID, (or name?). Display the product's name, description, price, and availability status.
 
-List All Events for a Customer: Display a list of all events a particular customer is registered for.
+- Search a Product: Allow users to search a product by its name or ID.
 
-List All Customers for an Event: Display a list of all customers registered for a particular event.
+- Search a Customer: Allow users to search a customer by their name or ID.
 
-List All Purchased Products for a Customer: Display a list of all products purchased by a particular customer.
+- Search an Event: Allow users to search an event by its title or ID.
+
+- List All Events for a Customer: Display a list of all events a particular customer is registered for. Display the event ID, title, description, date.
+
+- List All Customers for an Event: Display a list of all customers registered for a particular event. Display the customer ID, name, phone number.
+
+- List All Purchased Products for a Customer: Display a list of all products purchased by a particular customer. Display the product ID, name, description, price.
