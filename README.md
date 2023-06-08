@@ -4,8 +4,6 @@
 
 **AdventureShop**
 
-## Business Description
-
 ### Overview:
 AdventureShop is a small company specializing in the sale and distribution of high-quality outdoor adventure gear and equipment. With a passion for outdoor activities and a deep understanding of the needs of outdoor enthusiasts, we have been serving customers for over a decade. Our goal is to provide our customers with the best equipment and gear, ensuring they have memorable and safe outdoor experiences.
 
