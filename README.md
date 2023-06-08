@@ -2,7 +2,7 @@
 
 ## BUSINESS DESCRIPTION ##
 
-**AdventureShop**
+**Business Name: AdventureShop**
 
 ### Overview:
 AdventureShop is a small company specializing in the sale and distribution of high-quality outdoor adventure gear and equipment. With a passion for outdoor activities and a deep understanding of the needs of outdoor enthusiasts, we have been serving customers for over a decade. Our goal is to provide our customers with the best equipment and gear, ensuring they have memorable and safe outdoor experiences.
@@ -18,11 +18,11 @@ Customer Support: We understand that purchasing outdoor equipment can be overwhe
 
 Outdoor Workshops and Events: In addition to selling outdoor gear, we organize workshops and events to promote outdoor activities and provide educational opportunities. These workshops cover various topics such as hiking and camping skills, equipment maintenance, and safety guidelines. By fostering a sense of community, we aim to inspire and empower individuals to explore the outdoors confidently.
 
-## APP ##
+## APPLICATION INFORMATION ##
 
-**App Title**: AdventureShop Pro
+**App Title**: AdventureShop
 
-*Domain Name: adventureshoppro.com*
+*Domain Name: adventureshop.com*
 
 ### Purpose of the App:
 The AdventureShop Pro app aims to revolutionize the way outdoor enthusiasts explore and engage with our products and services. It serves as a comprehensive platform that enhances the overall customer experience by providing easy access to our product catalog, customer support and event registrations. The app combines convenience, information, and community engagement to support our customers' outdoor adventures and foster long-lasting relationships.
