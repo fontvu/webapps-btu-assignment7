@@ -22,14 +22,14 @@ Outdoor Workshops and Events: In addition to selling outdoor gear, we organize w
 
 ## APP ##
 
-App Title: AdventureShop Pro
+**App Title**: AdventureShop Pro
 
-Domain Name: adventureshoppro.com
+*Domain Name: adventureshoppro.com*
 
-Purpose of the App:
+### Purpose of the App:
 The AdventureShop Pro app aims to revolutionize the way outdoor enthusiasts explore and engage with our products and services. It serves as a comprehensive platform that enhances the overall customer experience by providing easy access to our product catalog, customer support and event registrations. The app combines convenience, information, and community engagement to support our customers' outdoor adventures and foster long-lasting relationships.
 
-App Requirements:
+### App Requirements:
 To enhance our business operations and improve the overall customer experience, we require a new app that fulfills the following requirements:
 
 Product Catalog and Inventory Management: The app should showcase our product catalog, including descriptions, pricing, and availability. It should enable customers to browse through the catalog and access comprehensive product information. Additionally, the app should integrate with our inventory management system to ensure real-time updates on stock availability. When customers purchase a product, the availability should change accordingly.
