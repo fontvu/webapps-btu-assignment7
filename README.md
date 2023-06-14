@@ -38,38 +38,23 @@ Event and Workshop Registration: To streamline our event organization process, t
 
 ## **INFORMATION MANAGEMENT TASKS** ##
 
-- Enter New Product Data: Add a new product to the product catalog by entering its ID, name, description, price, and availability status.
-
-- Update Product Data: Allow updating of all product data items except the product ID, including the name, description, price, and availability status.
-
-- View Product Catalog: Display a list of all products in the catalog, showing each product's ID, name, description, price, and availability status.
-
-- Enter New Customer Data: Register a new customer by entering their ID, name, phone number.
-
-- Update Customer Data: Allow updating of all customer data items except the customer ID, including the name, phone number.
-
-- View Customer Details: Display the details of a customer, including their ID, name, phone number, and the list of purchased products.
-
-- Enter New Event Data: Add a new event or workshop by entering title, description, date, and an empty list of registered users. The event ID is automatically generated.
-
-- Update Event Data: Allow updating of all event data items except the event ID, including the title, description, date, and the list of registered users.
-
-- View Event Details: Display the details of an event, including its ID, title, description, date, and the list of registered users.
-
-- Product Purchase: Register a product purchase by a customer, updating the product's availability status and adding the product to the customer's list of purchased products.
-
-- Customer Registration for Event: Register a customer for an event, updating the event's list of registered users.
-
-- Check Product Availability: Allow users to check the availability status of a product by entering its ID, (or name?). Display the product's name, description, price, and availability status.
-
-- Search a Product: Allow users to search a product by its name or ID.
-
-- Search a Customer: Allow users to search a customer by their name or ID.
-
-- Search an Event: Allow users to search an event by its title or ID.
-
-- List All Events for a Customer: Display a list of all events a particular customer is registered for. Display the event ID, title, description, date.
-
-- List All Customers for an Event: Display a list of all customers registered for a particular event. Display the customer ID, name, phone number.
-
-- List All Purchased Products for a Customer: Display a list of all products purchased by a particular customer. Display the product ID, name, description, price.
+| Original | Refined |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| Enter New Product Data: Add a new product to the product catalog by entering its ID, name, description, price, and availability status. | Enter New Product Data: Add a new product to the product catalog by entering its name, description, price, and availability status. a unique id should be generated (starting from 1 and being incremented by 1 for each new product |
+| Update Product Data: Allow updating of all product data items except the product ID, including the name, description, price, and availability status. | Update Product Data: Allow updating of all product data items except the product ID, including the name, description, price, and availability status.2 |
+| View Product Catalog: Display a list of all products in the catalog, showing each product's ID, name, description, price, and availability status. | View Product Catalog: Display a list of all products in the catalog, showing each product's ID, name, description, price, and availability status. |
+| Enter New Customer Data: Register a new customer by entering their ID, name, phone number. | Enter New Customer Data: Register a new customer by entering their name (single string), phone number.  A unique id should be generated (starting from 1 and being incremented by 1 for each new customer |
+| Update Customer Data: Allow updating of all customer data items except the customer ID, including the name, phone number. | Update Customer Data: Allow updating of all customer data items except the customer ID, including the name, phone number. |
+| View Customer Details: Display the details of a customer, including their ID, name, phone number, and the list of purchased products. | View Customer Details: Display the details of a customer, including their ID, name, phone number, and the list of purchased products. |
+| Enter New Event Data: Add a new event or workshop by entering title, description, date, and an empty list of registered users. The event ID is automatically generated. | Enter New Event Data: Add a new event or workshop by entering title, description, date, and an empty list of registered customers.  A unique id should be generated (starting from 1 and being incremented by 1 for each new event |
+| Update Event Data: Allow updating of all event data items except the event ID, including the title, description, date, and the list of registered users. | Update Event Data: Allow updating of all event data items except the event ID, including the title, description, date, and the list of registered customers. |
+| View Event Details: Display the details of an event, including its ID, title, description, date, and the list of registered users. | View Event Details: Display the details of an event, including its ID, title, description, date, and the list of registered users.
+| Product Purchase: Register a product purchase by a customer, updating the product's availability status and adding the product to the customer's list of purchased products. | Product Purchase: Register a product purchase by a customer, updating the product's availability status and adding the product to the customer's list of purchased products.
+| Customer Registration for Event: Register a customer for an event, updating the event's list of registered users. | Customer Registration for Event: Register a customer for an event, updating the event's list of registered customers. 
+| Check Product Availability: Allow users to check the availability status of a product by entering its ID, (or name?). Display the product's name, description, price, and availability status. | Check Product Availability: Allow users to check the availability status of a product by entering its ID, (or name?). Display the product's name, description, price, and availability status. |
+| Search a Product: Allow users to search a product by its name or ID. | Search a Product: Allow users to search a product by its name or ID. |
+| Search a Customer: Allow users to search a customer by their name or ID. | Search a Customer: Allow users to search a customer by their name or ID. |
+| Search an Event: Allow users to search an event by its title or ID. | Search an Event: Allow users to search an event by its title or ID. |
+| List All Events for a Customer: Display a list of all events a particular customer is registered for. Display the event ID, title, description date. | List All Events for a Customer: Display a list of all events a particular customer is registered for. Display the event ID, title, description date.
+| List All Customers for an Event: Display a list of all customers registered for a particular event. Display the customer ID, name, phone number. | List All Customers for an Event: Display a list of all customers registered for a particular event. Display the customer ID, name, phone number. |
+| List All Purchased Products for a Customer: Display a list of all products purchased by a particular customer. Display the product ID, name, description, price. | List All Purchased Products for a Customer: Display a list of all products purchased by a particular customer. Display the product ID, name, description, price. |
