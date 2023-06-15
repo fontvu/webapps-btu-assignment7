@@ -36,6 +36,13 @@ Customer Support and Communication: The app should include a customer support fe
 
 Event and Workshop Registration: To streamline our event organization process, the app should enable customers to register for workshops and events directly. It should save event details, dates, and have the option for customers to register for the event. 
 
+### Domain Model
+![Domain information model](domain%20model.png)
+
+### Design Model
+![Design information model](design%20model.jpg)
+
+
 ## **INFORMATION MANAGEMENT TASKS** ##
 
 | Original | Refined |
