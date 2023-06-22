@@ -65,3 +65,11 @@ Event and Workshop Registration: To streamline our event organization process, t
 | List All Events for a Customer: Display a list of all events a particular customer is registered for. Display the event ID, title, description date. | List All Events for a Customer: Display a list of all events a particular customer is registered for. Display the event ID, title, description date.
 | List All Customers for an Event: Display a list of all customers registered for a particular event. Display the customer ID, name, phone number. | List All Customers for an Event: Display a list of all customers registered for a particular event. Display the customer ID, name, phone number. |
 | List All Purchased Products for a Customer: Display a list of all products purchased by a particular customer. Display the product ID, name, description, price. | List All Purchased Products for a Customer: Display a list of all products purchased by a particular customer. Display the product ID, name, description, price. |
+
+
+## tasks for 7C-1
+
+create and retrieve: Ronny Porsch
+
+delete and update: Benito Staede
+
