@@ -1,0 +1,37 @@
+{
+  "name": "js-firebase-minimal",
+  "version": "1.1.0",
+  "description": "Part 1: Learn how to build a Minimal Web App using JS and Firebase",
+  "homepage": "https://js-firebase-minimal.web.app/tutorial",
+  "main": "index.html",
+  "keywords": [
+    "javascript",
+    "firebase",
+    "firestore",
+    "crud",
+    "firebase SDK version 9",
+    "minimal"
+  ],
+  "contributors": [
+    {
+      "name": "Gerd Wagner",
+      "email": "gwagner57@googlemail.com",
+      "url": "https://web-engineering.info/"
+    },
+    {
+      "name": "Juan-Francisco Reyes",
+      "email": "pacoreyesp@gmail.com"
+    }
+  ],
+  "license": "SEE LICENSE IN https://www.codeproject.com/info/cpol10.aspx",
+  "bugs": {
+    "email": "gwagner57@googlemail.com"
+  },
+  "dependencies": {
+    "firebase": "^9.22.2",
+    "firebase-firestore-lite": "^1.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
