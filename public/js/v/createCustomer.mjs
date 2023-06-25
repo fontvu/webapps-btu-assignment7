@@ -1,5 +1,5 @@
 /**
- * @fileOverview  View methods for the use case "create book"
+ * @fileOverview  View methods for the use case "create customer"
  * @author Gerd Wagner
  * @author Juan-Francisco Reyes
  */
