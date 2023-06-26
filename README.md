@@ -73,3 +73,9 @@ create and retrieve: Ronny Porsch
 
 delete and update: Benito Staede
 
+## tasks for 7C-2
+
+authentication, authorization: Ronny Porsch
+
+Enabling/disabling UI elements based on authentication: Benito Staede
+
