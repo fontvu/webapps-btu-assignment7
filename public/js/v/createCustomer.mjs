@@ -6,7 +6,13 @@
 /***************************************************************
  Import classes and data types
  ***************************************************************/
+import { handleAuthentication } from "./accessControl.mjs";
 import Customer from "../m/Customer.mjs";
+
+/***************************************************************
+ Setup and handle UI Authentication
+ ***************************************************************/
+handleAuthentication();
 
 /***************************************************************
  Declare variables for accessing UI elements
