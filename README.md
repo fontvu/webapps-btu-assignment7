@@ -71,11 +71,15 @@ Event and Workshop Registration: To streamline our event organization process, t
 
 create and retrieve: Ronny Porsch
 
-delete and update: Benito Staede
+delete and update: Benito Staedel
 
 ## tasks for 7C-2
 
 authentication, authorization: Ronny Porsch
 
-Enabling/disabling UI elements based on authentication: Benito Staede
+Enabling/disabling UI elements based on authentication: Benito Staedel
+
+## tasks for 7C-3
+1 Implement data validation: Ronny Porsch
+2 2 Implement DB-UI synchronization: Benito Staedel
 
