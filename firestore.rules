@@ -1,9 +1,49 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow anyone
-    match /{document=**} {
-      allow read, write; // or allow read, write: if true;
+    /** VALIDATION FUNCTIONS **/
+    function checkId( id) {
+      return id.matches('^[0-9]+$')
+             && id != null;
+    }
+    // check if exist document with same ID
+    function checkIdAsId( id) {
+      return !(exists(/databases/$(database)/documents/customers/$(id)));
+    }
+    // check name is nonempty string
+    function checkName( name) {
+    	return name.matches('^[A-Za-z]+')
+    }
+    // check if is integer
+    function checkphoneNumber( phoneNumber) {
+   		return phoneNumber is int
+    }
+    /** VALIDATION RULES **/
+    match /{customers}/{document=**} {
+      /** RULES FOR allow read WITH CONVENIENCE METHOD - LOW GRANULARITY **/
+      /** NO authentication required **/
+      allow read: if request.auth != null;
+
+      /** RULES FOR allow write WITH STANDARD METHODS - HIGH GRANULARITY **/
+      /** authentication required **/
+      //validate when create new book record
+      allow create: if request.auth.token.email_verified == true
+                       && checkIdAsId( request.resource.data.id) == true
+                       && checkId( request.resource.data.id) == true
+                       && checkName( request.resource.data.name) == true
+                       && checkPhoneNumber( request.resource.data.phoneNumber);
+
+      // validate when update book record
+      allow update: if request.auth.token.email_verified == true
+                       && (request.resource.data.diff( resource.data).affectedKeys()
+                        .hasOnly(['name', 'phoneNumber']))
+                       && request.resource.data.name != null ?
+                           checkName( request.resource.data.name) : true
+                       && request.resource.data.phoneNumber != null ?
+                           checkPhoneNumber( request.resource.data.phoneNumber) : true;
+
+      // validate when delete customer record
+      allow delete: if request.auth.token.email_verified == true;
     }
   }
 }
