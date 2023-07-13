@@ -81,5 +81,6 @@ Enabling/disabling UI elements based on authentication: Benito Staedel
 
 ## tasks for 7C-3
 1 Implement data validation: Ronny Porsch
-2 2 Implement DB-UI synchronization: Benito Staedel
+
+2 Implement DB-UI synchronization, Test Data from JSON file: Benito Staedel
 

@@ -8,8 +8,9 @@
  * can be modified to create derivative works, can be redistributed, and can be used in commercial applications.
  */
 import { fsDb } from "../initFirebase.mjs";
-import { collection as fsColl, deleteDoc, doc as fsDoc, getDoc, getDocs, setDoc, updateDoc }
-  from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore-lite.js";
+import { collection as fsColl, deleteDoc, doc as fsDoc, getDoc, getDocs, setDoc, updateDoc, onSnapshot }
+  from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
+import { createModalFromChange } from "../lib/util.mjs";
 
 /**
  * Constructor function for the class Customer
@@ -112,6 +113,54 @@ Customer.destroy = async function (id) {
     console.error(`Error when deleting customer record: ${e}`);
   }
 };
+/**
+ * Conversion between a Customer object and a corresponding Firestore document
+ * @type {{toFirestore: (function(*): {id: string, name: string, phoneNumber: string}),
+ * fromFirestore: (function(*, *=): Customer)}}
+ */
+Customer.converter = {
+  toFirestore: function (customer) {
+    return {
+      id: customer.id,
+      name: customer.name,
+      phoneNumber: customer.phoneNumber
+    };
+  },
+  fromFirestore: function (snapshot, options) {
+    const data = snapshot.data( options);
+    return new Customer( data);
+  }
+};
+
+/*******************************************
+ *** Non specific use case procedures ******
+ ********************************************/
+/**
+ * Handle DB-UI synchronization
+ * @param isbn {string}
+ * @returns {function}
+ */
+Customer.observeChanges = async function (customerId) {
+  //try {
+    // listen document changes, returning a snapshot (snapshot) on every change
+    const customerDocRef = fsDoc( fsDb, "customers", customerId).withConverter( Customer.converter);
+    const customerRec = (await getDoc( customerDocRef)).data();
+    return onSnapshot( customerDocRef, function (snapshot) {
+      // create object with original document data
+      const originalData = { itemName: "customer", description: customerRec.name };
+      if (!snapshot.data()) { // removed: if snapshot has not data
+        originalData.type = "REMOVED";
+        createModalFromChange( originalData); // invoke modal window reporting change of original data
+      } else if (JSON.stringify( customerRec) !== JSON.stringify( snapshot.data())) {
+        originalData.type = "MODIFIED";
+        createModalFromChange( originalData); // invoke modal window reporting change of original data
+      }
+    });
+  /*} catch (e) {
+    console.error(`${e.constructor.name} : ${e.message}`);
+  }*/
+}
+
 /*******************************************
  *** Auxiliary methods for testing **********
  ********************************************/
@@ -119,25 +168,16 @@ Customer.destroy = async function (id) {
  * Create test data
  */
 Customer.generateTestData = async function () {
-  let customerRecs = [
-    {
-      id: "2",
-      name: "Dude2",
-      phoneNumber: "+49 1515 8815250"},
-    {
-      id: "3",
-      name: "Dude3",
-      phoneNumber: "+49 172 88465186"
-    },
-    {
-      id: "4",
-      name: "Dude4",
-      phoneNumber: "+49 162 8019585"
-    }
-  ];
-  // save all customer record/documents
-  await Promise.all( customerRecs.map( d => Customer.add( d)));
-  console.log(`${Object.keys( customerRecs).length} customer records saved.`);
+  try {
+    console.log("Generating test data...");
+    const response = await fetch( "../../test-data/customers.json");
+    const customerRecs = await response.json();
+    console.log(customerRecs)
+    await Promise.all( customerRecs.map( d => Customer.add( d)));
+    console.log(`${customerRecs.length} customer records saved.`);
+  } catch (e) {
+    console.error(`${e.constructor.name}: ${e.message}`);
+  }
 };
 /**
  * Clear database

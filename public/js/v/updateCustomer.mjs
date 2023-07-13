@@ -28,6 +28,11 @@ const formEl = document.forms["Customer"],
   select = formEl["selectCustomer"];
 
 /***************************************************************
+ Declare variable to cancel record changes listener, DB-UI sync
+ ***************************************************************/
+let cancelListener = null;
+
+/***************************************************************
  Fill select element with customers
  ***************************************************************/
 fillSelectWithOptions(select, customerRecords.map((c) => ({ value: c.id.toString(), text: c.name })));
@@ -40,13 +45,14 @@ select.addEventListener("change", async function () {
     formEl.reset();
     return;
   }
-  console.log('retrieving', select.value);
+  const customerId = select.value;
   const customer = await Customer.retrieve(select.value);
-  console.log(customer);
   if (customer) {
     formEl["id"].value = customer.id;
     formEl["name"].value = customer.name;
     formEl["phoneNumber"].value = customer.phoneNumber;
+    if (cancelListener) cancelListener();
+    cancelListener = Customer.observeChanges( customerId);
   } else {
     formEl.reset();
   }
@@ -64,3 +70,9 @@ submitButton.addEventListener("click", async function () {
   await Customer.update( slots);
   formEl.reset();
 });
+
+// set event to cancel DB listener when the browser window/tab is closed
+window.addEventListener("beforeunload", function () {
+  if (cancelListener) cancelListener();
+});
+
