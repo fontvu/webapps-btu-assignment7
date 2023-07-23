@@ -84,3 +84,6 @@ Enabling/disabling UI elements based on authentication: Benito Staedel
 
 2 Implement DB-UI synchronization, Test Data from JSON file: Benito Staedel
 
+## tasks for 7C-4
+Implement classes Product, ProductCatalog, corresponding UI, validation and test-data: Benito Städel
+Implement class Event, corresponding UI, validation and test-data: Ronny Porsch
