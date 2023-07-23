@@ -53,7 +53,8 @@ Product.add = async function (slots) {
 Product.retrieve = async function (id) {
   let productDocSn = null;
   try {
-    const productDocRef = fsDoc( fsDb, "product", id);
+    const productDocRef = fsDoc( fsDb, "products", id);
+    console.log(productDocRef)
     productDocSn = await getDoc( productDocRef);
   } catch( e) {
     console.error(`Error when retrieving product record: ${e}`);
@@ -149,7 +150,7 @@ Product.converter = {
 Product.observeChanges = async function (productId) {
   //try {
     // listen document changes, returning a snapshot (snapshot) on every change
-    const productDocRef = fsDoc( fsDb, "product", productId).withConverter( Product.converter);
+    const productDocRef = fsDoc( fsDb, "products", productId).withConverter( Product.converter);
     const productRec = (await getDoc( productDocRef)).data();
     return onSnapshot( productDocRef, function (snapshot) {
       // create object with original document data

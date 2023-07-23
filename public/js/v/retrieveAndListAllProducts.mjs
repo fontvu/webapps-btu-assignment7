@@ -17,7 +17,7 @@ handleAuthentication();
 /***************************************************************
  Load data
  ***************************************************************/
-const productRecords = await Product.retrieveAll();
+const productRecords = (await Product.retrieveAll()).sort((a,b) => +a.id > +b.id);
 
 /***************************************************************
  Declare variables for accessing UI elements
@@ -27,12 +27,37 @@ const tableBodyEl = document.querySelector("table#products>tbody");
 /***************************************************************
  Render list of all product records
  ***************************************************************/
-// for each product, create a table row with a cell for each attribute
-for (const productRec of productRecords) {
-  const row = tableBodyEl.insertRow();
-  row.insertCell().textContent = productRec.id;
-  row.insertCell().textContent = productRec.name;
-  row.insertCell().textContent = productRec.description;
-  row.insertCell().textContent = productRec.price;
-  row.insertCell().textContent = productRec.availabilityStatus;
+
+let page = 0;
+let maxPage = Math.ceil(productRecords.length / 10) - 1;
+let visibleEntries = productRecords.slice(0, 10);
+
+const prevButton = document.querySelector("#prev");
+const nextButton = document.querySelector("#next");
+
+prevButton.addEventListener("click", function () {
+  page--;
+  if (page < 0) page = 0;
+  updateTable();
+});
+nextButton.addEventListener("click", function () {
+  page++;
+  if (page > maxPage) page = maxPage;
+  updateTable();
+});
+
+function updateTable() {
+  tableBodyEl.innerHTML = "";
+  visibleEntries = productRecords.slice(page * 10, (page+1)*10);
+  // for each product, create a table row with a cell for each attribute
+  for (const productRec of visibleEntries) {
+    const row = tableBodyEl.insertRow();
+    row.insertCell().textContent = productRec.id;
+    row.insertCell().textContent = productRec.name;
+    row.insertCell().textContent = productRec.description;
+    row.insertCell().textContent = productRec.price;
+    row.insertCell().textContent = productRec.availabilityStatus;
+  }
 }
+
+updateTable();

@@ -44,8 +44,13 @@ function handleAuthentication() {
 function handleAuthorization( userStatus, currentPage, email) {
   // declare variables for current page and for accessing UI elements
   const divLoginMgmtEl = document.getElementById("login-management"),
-    startPage = ["/","/index.html"],
-    authorizedPages = startPage.concat(["/retrieveAndListAllCustomers.html", "/credits.html"]);
+    startPage = ["/", "/index.html", "/create.html", "/retrieve.html", "/update.html", "/delete.html"],
+    authorizedPages = startPage.concat([
+      "/retrieveAndListAllCustomers.html",
+      "/retrieveAndListAllProducts.html",
+      "/retrieveAndListAllProductCatalogs.html",
+      "/credits.html"
+    ]);
   switch (userStatus) {
     case "Anonymous":
       // if user is not authorized to current page, restrict access & redirect to sign up page
@@ -68,7 +73,9 @@ function handleAuthorization( userStatus, currentPage, email) {
           disabledEls = document.querySelectorAll(".disabled");
         // perform DOM operations to enable menu items
         for (const el of disabledEls) el.classList.remove("disabled");
-        clearDataBtn.disabled = false;
+        if (clearDataBtn) {
+          clearDataBtn.disabled = false;
+        }
         for (const btn of generateDataBtns) btn.disabled = false;
       }
       divLoginMgmtEl.appendChild( createSignOutUI( email));

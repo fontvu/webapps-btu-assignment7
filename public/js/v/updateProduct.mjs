@@ -46,7 +46,8 @@ select.addEventListener("change", async function () {
     return;
   }
   const productId = select.value;
-  const product = await Product.retrieve(select.value);
+  const product = await Product.retrieve( select.value);
+  console.log(product);
   if (product) {
     formEl["id"].value = product.id;
     formEl["name"].value = product.name;
@@ -71,9 +72,25 @@ submitButton.addEventListener("click", async function () {
     price: formEl["price"].value,
     availabilityStatus: formEl["availabilityStatus"].value
   };
-  await Product.update( slots);
-  formEl.reset();
+  // check all property constraints
+  /*
+  formEl.name.setCustomValidity(Product.checkName( slots.name).message);
+  formEl.description.setCustomValidity(Product.checkDescription( slots.description).message);
+  formEl.price.setCustomValidity(Product.checkPrice( slots.price).message);
+  formEl.availabilityStatus.setCustomValidity(Product.checkAvailabilityStatus( slots.availabilityStatus).message);
+  */
+  if (formEl.checkValidity()) {
+    await Product.update( slots);
+    formEl.reset();
+  }
 });
+
+/*
+formEl.id.addEventListener("input", function () {
+  createFormEl.personId.setCustomValidity(
+    Person.checkPersonIdAsId( createFormEl.personId.value).message);
+});
+*/
 
 // set event to cancel DB listener when the browser window/tab is closed
 window.addEventListener("beforeunload", function () {
