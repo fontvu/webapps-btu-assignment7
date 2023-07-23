@@ -1,0 +1,9 @@
+[
+  {
+    "id": "1",
+    "name": "Rope",
+    "description": "Climbing rope",
+    "price": 12.5,
+    "availabilityStatus": 200
+  }
+]

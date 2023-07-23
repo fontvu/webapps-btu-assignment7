@@ -31,15 +31,22 @@
   <script type="module">
     import {handleAuthentication} from "./js/v/accessControl.mjs";
     import Customer from "./js/m/Customer.mjs";
+    import Product from "./js/m/Product.mjs";
 
     handleAuthentication();
     window.addEventListener("load", function () {
       const clearButton = document.getElementById("clearData"),
               generateTestDataButtons = document.querySelectorAll("button.generateTestData");
       // set event handlers for the buttons "clearData" and "generateTestData"
-      clearButton.addEventListener("click", Customer.clearData);
+      clearButton.addEventListener("click", function () {
+        Customer.clearData();
+        Product.clearData();
+      });
       for (const btn of generateTestDataButtons) {
-        btn.addEventListener("click", Customer.generateTestData);
+        btn.addEventListener("click", function () {
+          Customer.generateTestData();
+          Product.generateTestData();
+        });
       }
     });
   </script>
@@ -61,10 +68,10 @@
     is the 1st example app of our incremental sequence of six examples of
     <a href="https://js-firebase-tutorials.netlify.app">Plain JavaScript and Firebase Web Apps</a>. This app supports the following operations:</p>
   <menu>
-    <li><a href="createCustomer.html" class="disabled">Create</a> a new customer record</li>
-    <li><a href="retrieveAndListAllCustomers.html">Retrieve</a> and list all customer records</li>
-    <li><a href="updateCustomer.html" class="disabled">Update</a> a customer record</li>
-    <li><a href="deleteCustomer.html" class="disabled">Delete</a> a customer record</li>
+    <li><a href="create.html" class="disabled">Create</a> new records</li>
+    <li><a href="retrieve.html">Retrieve</a> existing records</li>
+    <li><a href="update.html" class="disabled">Update</a> existing records</li>
+    <li><a href="delete.html" class="disabled">Delete</a> existing records</li>
     <li style="margin-top: 1em"><button class="generateTestData" type="button" disabled="disabled">Generate test data</button></li>
     <li><button id="clearData" type="button"  disabled="disabled">Clear database</button></li>
   </menu>

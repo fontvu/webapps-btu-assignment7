@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Minimal Web App with JS and Firebase</title>
+  <meta name="description" content="A minimal effort web app with plain JS + Firebase."/>
+  <link rel="icon" href="favicon.ico"/>
+  <style>
+    figure {
+      float: right;
+    }
+
+    a.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    div#login-management {
+      text-align: right;
+      padding: 1em;
+      background: #fffde9;
+      border: 1px solid #ffbb4c;
+      height: 1em;
+    }
+  </style>
+  <script type="module">
+    import {handleAuthentication} from "./js/v/accessControl.mjs";
+
+    handleAuthentication();
+  </script>
+</head>
+<body>
+<header>
+  <div id="login-management"></div>
+  <h1>Minimal App with Access Control — Public Library</h1>
+</header>
+<main>
+  <h1>Retrieve</h1>
+  <div class="subheading">A Minimal effort Web App built with Plain JS and Firebase</div>
+  <figure style="float:right">
+    <img property="thumbnailUrl" src="machine-build.svg" alt="Web Engineering"
+         title="Icon made by Lorc under CC BY 3.0. Available on https://game-icons.net" width="120"/>
+  </figure>
+  <p>This app, which is accompanied by a <a
+          href="https://js-firebase-tutorials.netlify.app/minimal/">tutorial</a>,
+    is the 1st example app of our incremental sequence of six examples of
+    <a href="https://js-firebase-tutorials.netlify.app">Plain JavaScript and Firebase Web Apps</a>. This app supports the following operations:</p>
+  <menu>
+    <li><a href="retrieveAndListAllCustomers.html">Retrieve</a> and list all customer records</li>
+    <li><a href="retrieveAndListAllProducts.html">Retrieve</a> and list all product records</li>
+  </menu>
+</main>
+<footer>
+  <hr/>
+  Copyright © 2020-2022 Gerd Wagner (<a href="https://www.b-tu.de/fg-internet-technologie">Chair of Internet
+  Technology</a>) and Juan-Francisco Reyes,
+  Brandenburg University of Technology, Germany. The code of this tutorial web app is licensed under
+  <a rel="license" href="https://www.codeproject.com/info/cpol10.aspx">The Code Project Open License (CPOL)</a>,
+  implying that the code is provided "as-is", can be modified to create derivative works,
+  can be redistributed, and can be used in commercial applications, but the associated article
+  must not be distributed or republished without the copyright holder's consent.
+</footer>
+</body>
+</html>
