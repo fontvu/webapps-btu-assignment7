@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>Minimal Web App with JS and Firebase: Retrieve and List</title>
+  <title>Minimal Web App with JS and Firebase: Create</title>
   <link rel="icon" href="favicon.ico"/>
   <style>
     div#login-management {
@@ -13,26 +13,20 @@
       height: 1em;
     }
   </style>
-  <script src="js/v/retrieveAndListAllProducts.mjs" type="module"></script>
+  <script src="js/v/createProductCatalog.mjs" type="module"></script>
 </head>
 <body>
 <header>
   <div id="login-management"></div>
-  <h1>Retrieve and list all product records</h1>
+  <h1>Create a new product catalog record</h1>
 </header>
 <main>
-  <table id="products">
-    <thead>
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Availability Status</th>
-    </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <form id="ProductCatalog">
+    <div><label>Name: <input name="name"/></label></div>
+    <div>
+      <button name="commit" type="button">Create</button>
+    </div>
+  </form>
 </main>
 <br>
 <footer>

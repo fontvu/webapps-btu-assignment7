@@ -119,7 +119,7 @@ Product.destroy = async function (id) {
 };
 /**
  * Conversion between a product object and a corresponding Firestore document
- * @type {{toFirestore: (function(*): {id: string, name: string, phoneNumber: string}),
+ * @type {{toFirestore: (function(*): {id: string, name: string, description: string, price: number, availabilityStatus: number}),
  * fromFirestore: (function(*, *=): Product)}}
  */
 Product.converter = {

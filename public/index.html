@@ -32,6 +32,7 @@
     import {handleAuthentication} from "./js/v/accessControl.mjs";
     import Customer from "./js/m/Customer.mjs";
     import Product from "./js/m/Product.mjs";
+    import ProductCatalog from "./js/m/ProductCatalog.mjs";
 
     handleAuthentication();
     window.addEventListener("load", function () {
@@ -41,11 +42,13 @@
       clearButton.addEventListener("click", function () {
         Customer.clearData();
         Product.clearData();
+        ProductCatalog.clearData();
       });
       for (const btn of generateTestDataButtons) {
         btn.addEventListener("click", function () {
           Customer.generateTestData();
           Product.generateTestData();
+          ProductCatalog.generateTestData();
         });
       }
     });
