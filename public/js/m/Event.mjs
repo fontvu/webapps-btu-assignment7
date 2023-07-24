@@ -126,7 +126,7 @@ Event.converter = {
         return {
             id: event.id,
             title: event.title,
-            description: event.description
+            description: event.description,
             date: event.date
 
         };
