@@ -37,6 +37,8 @@ let cancelListener = null;
  Fill select element with customers
  ***************************************************************/
 fillSelectWithOptions(select, customerRecords.map((c) => ({ value: c.id.toString(), text: c.name })));
+select.disabled = false;
+
 /*******************************************************************
  Setup listener on the selected customer record synchronising DB with UI
  ******************************************************************/

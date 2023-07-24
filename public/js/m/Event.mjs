@@ -177,7 +177,6 @@ Event.generateTestData = async function () {
         console.log("Generating test data...");
         const response = await fetch( "../../test-data/events.json");
         const eventRecs = await response.json();
-        console.log(eventRecs)
         await Promise.all( eventRecs.map( d => Event.add( d)));
         console.log(`${eventRecs.length} event records saved.`);
     } catch (e) {

@@ -8,6 +8,7 @@
  ***************************************************************/
 import { handleAuthentication } from "./accessControl.mjs";
 import ProductCatalog from "../m/ProductCatalog.mjs";
+import Product from "../m/Product.mjs";
 
 /***************************************************************
  Setup and handle UI Authentication
@@ -46,13 +47,15 @@ nextButton.addEventListener("click", function () {
   updateTable();
 });
 
-function updateTable() {
+async function updateTable() {
   tableBodyEl.innerHTML = "";
   visibleEntries = productCatalogRecords.slice(page * 10, (page+1)*10);
   // for each product catalog, create a table row with a cell for each attribute
   for (const productCatalogRec of visibleEntries) {
+    const products = await Promise.all(productCatalogRec.contains.map((p) => Product.retrieve(p.toString())));
     const row = tableBodyEl.insertRow();
     row.insertCell().textContent = productCatalogRec.name;
+    row.insertCell().textContent = products.map((p) => p.name).join(", ");
   }
 }
 

@@ -19,10 +19,11 @@ import { createModalFromChange } from "../lib/util.mjs";
  */
 class Customer {
   // record parameter with the ES6 syntax for function parameter destructuring
-  constructor({id, name, phoneNumber}) {
+  constructor({id, name, phoneNumber, hasPurchased}) {
     this.id = id;
     this.name = name;
     this.phoneNumber = phoneNumber;
+    this.hasPurchased = hasPurchased;
   }
 }
 /*********************************************************
@@ -90,6 +91,7 @@ Customer.update = async function (slots) {
   // update only those slots that have changed
   if (customerRec.name !== slots.name) updSlots.name = slots.name;
   if (customerRec.phoneNumber !== slots.phoneNumber) updSlots.phoneNumber = slots.phoneNumber;
+  if (customerRec.hasPurchased !== slots.hasPurchased) updSlots.hasPurchased = slots.hasPurchased;
   if (Object.keys( updSlots).length > 0) {
     try {
       const customerDocRef = fsDoc( fsDb, "customers", slots.id);
@@ -172,7 +174,6 @@ Customer.generateTestData = async function () {
     console.log("Generating test data...");
     const response = await fetch( "../../test-data/customers.json");
     const customerRecs = await response.json();
-    console.log(customerRecs)
     await Promise.all( customerRecs.map( d => Customer.add( d)));
     console.log(`${customerRecs.length} customer records saved.`);
   } catch (e) {

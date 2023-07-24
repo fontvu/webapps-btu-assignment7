@@ -36,6 +36,7 @@ let cancelListener = null;
  Fill select element with customers
  ***************************************************************/
 fillSelectWithOptions(select, customerRecords.map((c) => ({ value: c.id.toString(), text: c.name })));
+select.disabled = false;
 
 /***************************************************************
  Add change event listener to update form values on selection change

@@ -36,6 +36,7 @@ let cancelListener = null;
  Fill select element with product
  ***************************************************************/
 fillSelectWithOptions(select, productRecords.map((c) => ({ value: c.id.toString(), text: c.name })));
+select.disabled = false;
 
 /***************************************************************
  Add change event listener to update form values on selection change
@@ -47,7 +48,6 @@ select.addEventListener("change", async function () {
   }
   const productId = select.value;
   const product = await Product.retrieve( select.value);
-  console.log(product);
   if (product) {
     formEl["id"].value = product.id;
     formEl["name"].value = product.name;

@@ -11,6 +11,7 @@ import { fsDb } from "../initFirebase.mjs";
 import { collection as fsColl, deleteDoc, doc as fsDoc, getDoc, getDocs, setDoc, updateDoc, onSnapshot }
   from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 import { createModalFromChange } from "../lib/util.mjs";
+import Product from "./Product.mjs";
 
 /**
  * Constructor function for the class ProductCatalog
@@ -19,8 +20,9 @@ import { createModalFromChange } from "../lib/util.mjs";
  */
 class ProductCatalog {
   // record parameter with the ES6 syntax for function parameter destructuring
-  constructor({name}) {
+  constructor({name, contains}) {
     this.name = name;
+    this.contains = contains;
   }
 }
 /*********************************************************
@@ -87,6 +89,7 @@ ProductCatalog.update = async function (slots) {
   const productCatalogRec = await ProductCatalog.retrieve( slots.name);
   // update only those slots that have changed
   if (productCatalogRec.name !== slots.name) updSlots.name = slots.name;
+  if (productCatalogRec.contains !== slots.contains) updSlots.contains = slots.contains;
   if (Object.keys( updSlots).length > 0) {
     try {
       const productCatalogDocRef = fsDoc( fsDb, "productCatalogs", slots.name);
@@ -119,6 +122,7 @@ ProductCatalog.converter = {
   toFirestore: function (productCatalog) {
     return {
       name: productCatalog.name,
+      contains: productCatalog.contains
     };
   },
   fromFirestore: function (snapshot, options) {
@@ -167,7 +171,6 @@ ProductCatalog.generateTestData = async function () {
     console.log("Generating test data...");
     const response = await fetch( "../../test-data/productCatalogs.json");
     const productCatalogRecs = await response.json();
-    console.log(productCatalogRecs)
     await Promise.all( productCatalogRecs.map( d => ProductCatalog.add( d)));
     console.log(`${productCatalogRecs.length} product catalog records saved.`);
   } catch (e) {

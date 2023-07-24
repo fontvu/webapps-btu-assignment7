@@ -37,6 +37,8 @@ let cancelListener = null;
  Fill select element with product catalogs
  ***************************************************************/
 fillSelectWithOptions(select, productCatalogRecords.map((c) => ({ value: c.id.toString(), text: c.name })));
+select.disabled = false;
+
 /*******************************************************************
  Setup listener on the selected product catalog record synchronising DB with UI
  ******************************************************************/

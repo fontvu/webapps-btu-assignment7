@@ -11,6 +11,8 @@ import { fsDb } from "../initFirebase.mjs";
 import { collection as fsColl, deleteDoc, doc as fsDoc, getDoc, getDocs, setDoc, updateDoc, onSnapshot }
   from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 import { createModalFromChange } from "../lib/util.mjs";
+import ProductCatalog from "./ProductCatalog.mjs";
+import Customer from "./Customer.mjs";
 
 /**
  * Constructor function for the class Product
@@ -47,14 +49,13 @@ Product.add = async function (slots) {
 };
 /**
  * Load a product record from Firestore
- * @param id: {object}
+ * @param id: {string}
  * @returns {Promise<*>} productRecord: {array}
  */
 Product.retrieve = async function (id) {
   let productDocSn = null;
   try {
     const productDocRef = fsDoc( fsDb, "products", id);
-    console.log(productDocRef)
     productDocSn = await getDoc( productDocRef);
   } catch( e) {
     console.error(`Error when retrieving product record: ${e}`);
@@ -113,6 +114,20 @@ Product.update = async function (slots) {
 Product.destroy = async function (id) {
   try {
     await deleteDoc( fsDoc( fsDb, "products", id));
+    const productCatalogs = await ProductCatalog.retrieveAll();
+    productCatalogs.forEach(async (p) => {
+      if (p.contains.includes(+id)) {
+        p.contains.splice(p.contains.indexOf(+id), 1);
+        await ProductCatalog.update(p);
+      }
+    });
+    const customers = await Customer.retrieveAll();
+    customers.forEach(async (c) => {
+      if (c.hasPurchased.includes(+id)) {
+        c.hasPurchased.splice(c.hasPurchased.indexOf(+id), 1);
+        await Customer.update(c);
+      }
+    });
     console.log(`Product record ${id} deleted.`);
   } catch( e) {
     console.error(`Error when deleting product record: ${e}`);
@@ -179,7 +194,6 @@ Product.generateTestData = async function () {
     console.log("Generating test data...");
     const response = await fetch( "../../test-data/products.json");
     const productRecs = await response.json();
-    console.log(productRecs)
     await Promise.all( productRecs.map( d => Product.add( d)));
     console.log(`${productRecs.length} product records saved.`);
   } catch (e) {
