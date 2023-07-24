@@ -31,6 +31,26 @@ createButton.addEventListener("click", async function () {
     price: formEl["price"].value,
     availabilityStatus: formEl["availabilityStatus"].value
   };
-  await Product.add( slots);
-  formEl.reset();
+
+  formEl.id.setCustomValidity( await Product.checkIdAsId( slots.id));
+  if ( formEl.checkValidity()) {
+    await Product.add( slots);
+    formEl.reset();
+  }
+});
+
+formEl.id.addEventListener("input", function () {
+  formEl.id.setCustomValidity( Product.checkId( formEl.id.value));
+});
+formEl.name.addEventListener("input", function () {
+  formEl.name.setCustomValidity( Product.checkName( formEl.name.value));
+});
+formEl.description.addEventListener("input", function () {
+  formEl.description.setCustomValidity( Product.checkDescription( formEl.description.value));
+});
+formEl.price.addEventListener("input", function () {
+  formEl.price.setCustomValidity( Product.checkPrice( formEl.price.value));
+});
+formEl.availabilityStatus.addEventListener("input", function () {
+  formEl.availabilityStatus.setCustomValidity( Product.checkAvailabilityStatus( formEl.availabilityStatus.value));
 });

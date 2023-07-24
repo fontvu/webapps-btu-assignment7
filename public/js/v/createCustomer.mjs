@@ -27,8 +27,25 @@ createButton.addEventListener("click", async function () {
   const slots = {
     id: formEl["id"].value,
     name: formEl["name"].value,
-    phoneNumber: formEl["phoneNumber"].value
+    phoneNumber: formEl["phoneNumber"].value,
+    hasPurchased: formEl["hasPurchased"].value.split(",")
   };
-  await Customer.add( slots);
-  formEl.reset();
+
+  formEl.id.setCustomValidity( await Customer.checkIdAsId( slots.id));
+  formEl.hasPurchased.setCustomValidity( await Customer.checkHasPurchased( slots.hasPurchased));
+  if ( formEl.checkValidity()) {
+    await Customer.add( slots);
+    formEl.reset();
+  }
 });
+
+formEl.id.addEventListener("input", function () {
+  formEl.id.setCustomValidity( Customer.checkId( formEl.id.value));
+});
+formEl.name.addEventListener("input", function () {
+  formEl.name.setCustomValidity( Customer.checkName( formEl.name.value));
+});
+formEl.phoneNumber.addEventListener("input", function () {
+  formEl.phoneNumber.setCustomValidity( Customer.checkPhoneNumber( formEl.phoneNumber.value));
+});
+

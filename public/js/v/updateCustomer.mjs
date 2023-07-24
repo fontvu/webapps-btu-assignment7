@@ -66,10 +66,22 @@ submitButton.addEventListener("click", async function () {
   const slots = {
     id: select.value,
     name: formEl["name"].value,
-    phoneNumber: formEl["phoneNumber"].value
+    phoneNumber: formEl["phoneNumber"].value,
+    hasPurchased: formEl["hasPurchased"].value.split(",")
   };
-  await Customer.update( slots);
-  formEl.reset();
+
+  formEl.hasPurchased.setCustomValidity( await Customer.checkHasPurchased( slots.hasPurchased));
+  if ( formEl.checkValidity()) {
+    await Customer.update( slots);
+    formEl.reset();
+  }
+});
+
+formEl.name.addEventListener("input", function () {
+  formEl.name.setCustomValidity( Customer.checkName( formEl.name.value));
+});
+formEl.phoneNumber.addEventListener("input", function () {
+  formEl.phoneNumber.setCustomValidity( Customer.checkPhoneNumber( formEl.phoneNumber.value));
 });
 
 // set event to cancel DB listener when the browser window/tab is closed

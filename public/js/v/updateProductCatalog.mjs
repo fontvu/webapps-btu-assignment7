@@ -35,7 +35,7 @@ let cancelListener = null;
 /***************************************************************
  Fill select element with product catalog
  ***************************************************************/
-fillSelectWithOptions(select, productCatalogRecords.map((c) => ({ value: c.id.toString(), text: c.name })));
+fillSelectWithOptions(select, productCatalogRecords.map((c) => ({ value: c.name.toString(), text: c.name })));
 select.disabled = false;
 
 /***************************************************************
@@ -50,6 +50,7 @@ select.addEventListener("change", async function () {
   const productCatalog = await ProductCatalog.retrieve(select.value);
   if (productCatalog) {
     formEl["name"].value = productCatalog.name;
+    formEl["contains"].value = productCatalog.contains;
     if (cancelListener) cancelListener();
     cancelListener = ProductCatalog.observeChanges( productCatalogId);
   } else {
@@ -63,9 +64,17 @@ select.addEventListener("change", async function () {
 submitButton.addEventListener("click", async function () {
   const slots = {
     name: formEl["name"].value,
+    contains: formEl["contains"].value.split(",")
   };
-  await ProductCatalog.update( slots);
-  formEl.reset();
+  formEl.contains.setCustomValidity( await ProductCatalog.checkContains( slots.contains));
+  if ( formEl.checkValidity()) {
+    await ProductCatalog.update( slots);
+    formEl.reset();
+  }
+});
+
+formEl.name.addEventListener("input", function () {
+  formEl.name.setCustomValidity( ProductCatalog.checkName( formEl.name.value));
 });
 
 // set event to cancel DB listener when the browser window/tab is closed

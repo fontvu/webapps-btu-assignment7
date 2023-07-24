@@ -60,5 +60,6 @@ async function updateTable() {
     row.insertCell().textContent = products.map((p) => p.name).join(", ");
   }
 }
-
 updateTable();
+
+

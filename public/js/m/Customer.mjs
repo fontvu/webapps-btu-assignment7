@@ -11,6 +11,7 @@ import { fsDb } from "../initFirebase.mjs";
 import { collection as fsColl, deleteDoc, doc as fsDoc, getDoc, getDocs, setDoc, updateDoc, onSnapshot }
   from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 import { createModalFromChange } from "../lib/util.mjs";
+import Product from "./Product.mjs";
 
 /**
  * Constructor function for the class Customer
@@ -24,6 +25,30 @@ class Customer {
     this.name = name;
     this.phoneNumber = phoneNumber;
     this.hasPurchased = hasPurchased;
+  }
+
+  static checkId( id) {
+    id = parseFloat( id.toString());
+    if ( typeof id === "number" && !isNaN( id)) return "";
+    return "Must be a number";
+  }
+  static async checkIdAsId( id) {
+    if ( Customer.checkId( id)) return Customer.checkId( id);
+    if ( !await Customer.retrieve( id)) return "";
+    return "Already exists";
+  }
+  static checkName( name) {
+    if (typeof name === "string" && name.length > 0) return "";
+    return "Must be longer than 0";
+  }
+  static checkPhoneNumber( name) {
+    if (typeof name === "string" && name.length > 10) return "";
+    return "Must be longer than 10";
+  }
+  static async checkHasPurchased( hasPurchased) {
+    const products = await Promise.all(hasPurchased.map((id) => Product.retrieve( id)));
+    if (products.every((p) => !!p)) return "";
+    return "Not all IDs exist";
   }
 }
 /*********************************************************

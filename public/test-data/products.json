@@ -5,5 +5,12 @@
     "description": "Climbing rope",
     "price": 12.5,
     "availabilityStatus": 200
+  },
+  {
+    "id": "2",
+    "name": "Hook",
+    "description": "Climbing hook",
+    "price": 29.95,
+    "availabilityStatus": 50
   }
 ]

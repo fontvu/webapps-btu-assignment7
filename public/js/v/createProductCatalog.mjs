@@ -26,7 +26,18 @@ const formEl = document.forms["ProductCatalog"],
 createButton.addEventListener("click", async function () {
   const slots = {
     name: formEl["name"].value,
+    contains: formEl["contains"].value.split(",")
   };
-  await ProductCatalog.add( slots);
-  formEl.reset();
+  
+  formEl.name.setCustomValidity( await ProductCatalog.checkNameAsId( slots.name));
+  formEl.contains.setCustomValidity( await ProductCatalog.checkContains( slots.contains));
+  if ( formEl.checkValidity()) {
+    await ProductCatalog.add( slots);
+    formEl.reset();
+  }
 });
+
+formEl.name.addEventListener("input", function () {
+  formEl.name.setCustomValidity( ProductCatalog.checkName( formEl.name.value));
+});
+

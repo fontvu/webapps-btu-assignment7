@@ -16,3 +16,8 @@ div.show-modal div {
     z-index: 2;
     width: 50%;
 }
+form :invalid {
+    box-shadow: none;  /* neutralizing FF */
+    outline: dotted red;
+}
+

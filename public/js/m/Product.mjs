@@ -28,6 +28,35 @@ class Product {
     this.price = price;
     this.availabilityStatus = availabilityStatus;
   }
+
+  static checkId( id) {
+    id = parseFloat( id.toString());
+    if ( typeof id === "number" && !isNaN( id)) return "";
+    return "Must be a number"
+  }
+  static async checkIdAsId( id) {
+    if ( Product.checkId( id)) return Product.checkId( id);
+    if ( !await Product.retrieve( id)) return "";
+    return "Already exists";
+  }
+  static checkName( name) {
+    if (typeof name === "string" && name.length > 0) return "";
+    return "Must be longer than 0";
+  }
+  static checkDescription( description) {
+    if ( typeof description === "string" && description.length > 0) return "";
+    return "Must be longer than 0";
+  }
+  static checkPrice( price) {
+    price = parseFloat( price.toString());
+    if (typeof price === "number" && !isNaN( price)) return "";
+    return "Must be a number";
+  }
+  static checkAvailabilityStatus( availabilityStatus) {
+    availabilityStatus = parseFloat( availabilityStatus.toString());
+    if ( typeof availabilityStatus === "number" && availabilityStatus >= 0) return "";
+    return "Must be greater than 0";
+  }
 }
 /*********************************************************
  ***  Class-level ("static") storage management methods **

@@ -72,25 +72,22 @@ submitButton.addEventListener("click", async function () {
     price: formEl["price"].value,
     availabilityStatus: formEl["availabilityStatus"].value
   };
-  // check all property constraints
-  /*
-  formEl.name.setCustomValidity(Product.checkName( slots.name).message);
-  formEl.description.setCustomValidity(Product.checkDescription( slots.description).message);
-  formEl.price.setCustomValidity(Product.checkPrice( slots.price).message);
-  formEl.availabilityStatus.setCustomValidity(Product.checkAvailabilityStatus( slots.availabilityStatus).message);
-  */
-  if (formEl.checkValidity()) {
-    await Product.update( slots);
-    formEl.reset();
-  }
+  await Product.update( slots);
+  formEl.reset();
 });
 
-/*
-formEl.id.addEventListener("input", function () {
-  createFormEl.personId.setCustomValidity(
-    Person.checkPersonIdAsId( createFormEl.personId.value).message);
+formEl.name.addEventListener("input", function () {
+  formEl.name.setCustomValidity( Product.checkName( formEl.name.value));
 });
-*/
+formEl.description.addEventListener("input", function () {
+  formEl.description.setCustomValidity( Product.checkDescription( formEl.description.value));
+});
+formEl.price.addEventListener("input", function () {
+  formEl.price.setCustomValidity( Product.checkPrice( formEl.price.value));
+});
+formEl.availabilityStatus.addEventListener("input", function () {
+  formEl.availabilityStatus.setCustomValidity( Product.checkAvailabilityStatus( formEl.availabilityStatus.value));
+});
 
 // set event to cancel DB listener when the browser window/tab is closed
 window.addEventListener("beforeunload", function () {
