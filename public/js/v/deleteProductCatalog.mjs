@@ -36,7 +36,7 @@ let cancelListener = null;
 /***************************************************************
  Fill select element with product catalogs
  ***************************************************************/
-fillSelectWithOptions(select, productCatalogRecords.map((c) => ({ value: c.id.toString(), text: c.name })));
+fillSelectWithOptions(select, productCatalogRecords.map((c) => ({ value: c.name, text: c.name })));
 select.disabled = false;
 
 /*******************************************************************

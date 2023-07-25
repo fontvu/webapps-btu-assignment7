@@ -140,26 +140,26 @@ Product.update = async function (slots) {
  * @param id: {string}
  * @returns {Promise<void>}
  */
-Product.destroy = async function (id) {
+Product.destroy = async function ( id) {
   try {
     await deleteDoc( fsDoc( fsDb, "products", id));
     const productCatalogs = await ProductCatalog.retrieveAll();
-    productCatalogs.forEach(async (p) => {
-      if (p.contains.includes(+id)) {
-        p.contains.splice(p.contains.indexOf(+id), 1);
-        await ProductCatalog.update(p);
+    productCatalogs.forEach( async ( p) => {
+      if ( p.contains.includes( +id)) {
+        p.contains.splice( p.contains.indexOf( +id), 1);
+        await ProductCatalog.update( p);
       }
     });
     const customers = await Customer.retrieveAll();
-    customers.forEach(async (c) => {
-      if (c.hasPurchased.includes(+id)) {
-        c.hasPurchased.splice(c.hasPurchased.indexOf(+id), 1);
-        await Customer.update(c);
+    customers.forEach( async ( c) => {
+      if ( c.hasPurchased.includes(+id)) {
+        c.hasPurchased.splice( c.hasPurchased.indexOf( +id), 1);
+        await Customer.update( c);
       }
     });
-    console.log(`Product record ${id} deleted.`);
+    console.log( `Product record ${id} deleted.`);
   } catch( e) {
-    console.error(`Error when deleting product record: ${e}`);
+    console.error( `Error when deleting product record: ${e}`);
   }
 };
 /**

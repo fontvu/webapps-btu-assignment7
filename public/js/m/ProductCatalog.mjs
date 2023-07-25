@@ -35,8 +35,8 @@ class ProductCatalog {
     return "Already exists";
   }
   static async checkContains( contains) {
-    const products = await Promise.all(contains.map((id) => Product.retrieve( id)));
-    if (products.every((p) => !!p)) return "";
+    const products = await Promise.all( contains.map((id) => Product.retrieve( id)));
+    if ( products.every((p) => !!p)) return "";
     return "Not all IDs exist";
   }
 }
