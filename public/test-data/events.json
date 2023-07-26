@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "title": "Practice",
+    "description": "Weekly practice session",
+    "date": "2023-07-22T18:00:58.095Z",
+    "registeredCustomers": [1,5,9,30]
+  },
+  {
+    "id": "2",
+    "title": "Party",
+    "description": "Member party",
+    "date": "2023-07-23T18:00:58.095Z",
+    "registeredCustomers": [1,5,9,12,15,18,30]
+  },
+  {
+    "id": "3",
+    "title": "Competition",
+    "description": "Climbing competition",
+    "date": "2023-07-24T18:00:58.095Z",
+    "registeredCustomers": [1,5,9,30]
+  },
+  {
+    "id": "4",
+    "title": "Practice",
+    "description": "Weekly practice session",
+    "date": "2023-07-29T18:00:58.095Z",
+    "registeredCustomers": [1,5,9,30]
+  },
+  {
+    "id": "5",
+    "title": "Practice",
+    "description": "Weekly practice session",
+    "date": "2023-07-06T18:00:58.095Z",
+    "registeredCustomers": [1,5,9,30]
+  }
+]

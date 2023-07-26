@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Minimal Web App with JS and Firebase: Retrieve and List</title>
+  <link rel="icon" href="favicon.ico"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <style>
+    div#login-management {
+      text-align: right;
+      padding: 1em;
+      background: #fffde9;
+      border: 1px solid #ffbb4c;
+      height: 1em;
+    }
+  </style>
+  <script src="js/v/retrieveAndListAllEvents.mjs" type="module"></script>
+</head>
+<body>
+<header>
+  <div id="login-management"></div>
+  <h1>Retrieve and list all event records</h1>
+</header>
+<main>
+  <table id="events">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Registered Customers</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <button id="prev">&lt;</button>
+  <button id="next">&gt;</button>
+</main>
+<br>
+<footer>
+  <a href="index.html">« Back to main menu</a>
+</footer>
+</body>
+</html>

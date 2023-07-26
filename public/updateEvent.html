@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Minimal Web App with JS and Firebase: Update</title>
+  <link rel="icon" href="favicon.ico"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <style>
+    div#login-management {
+      text-align: right;
+      padding: 1em;
+      background: #fffde9;
+      border: 1px solid #ffbb4c;
+      height: 1em;
+    }
+  </style>
+  <script src="js/v/updateEvent.mjs" type="module"></script>
+</head>
+<body>
+<header>
+  <div id="modal-window">
+    <div></div>
+  </div>
+  <div id="login-management"></div>
+  <h1>Update a event record</h1>
+</header>
+
+<main>
+  <form id="Event">
+    <div>
+      <label>Select event: <select name="selectEvent" disabled></select></label>
+    </div>
+    <div>
+      <label>ID:
+        <output name="id"></output>
+      </label>
+    </div>
+    <div>
+      <label>Title: <input name="title"/></label>
+    </div>
+    <div>
+      <label>Description: <input name="description"/></label>
+    </div>
+    <div>
+      <label>Date: <input type="date" name="date"/></label>
+    </div>
+    <div>
+      <label>registeredCustomers: <input name="registeredCustomers"/></label>
+    </div>
+    <div>
+      <button name="commit" type="button">Save changes</button>
+    </div>
+  </form>
+</main>
+
+<br>
+
+<footer>
+  <a href="index.html">« Back to main menu</a>
+</footer>
+</body>
+</html>
