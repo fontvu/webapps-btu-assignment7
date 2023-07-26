@@ -9,6 +9,7 @@
 import { handleAuthentication } from "./accessControl.mjs";
 import Customer from "../m/Customer.mjs";
 import Product from "../m/Product.mjs";
+import Event from "../m/Event.mjs";
 
 /***************************************************************
  Setup and handle UI Authentication
@@ -53,11 +54,13 @@ async function updateTable() {
   // for each customer, create a table row with a cell for each attribute
   for (const customerRec of visibleEntries) {
     const products = await Promise.all(customerRec.hasPurchased.map((c) => Product.retrieve(c.toString())));
+    const events = await Promise.all(customerRec.registeredEvents.map((c) => Event.retrieve(c.toString())));
     const row = tableBodyEl.insertRow();
     row.insertCell().textContent = customerRec.id;
     row.insertCell().textContent = customerRec.name;
     row.insertCell().textContent = customerRec.phoneNumber;
     row.insertCell().textContent = products.map((p) => p.name).join(", ");
+    row.insertCell().textContent = events.map((e) => e.title).join(", ");
   }
 }
 updateTable();

@@ -11,6 +11,7 @@ import { fsDb } from "../initFirebase.mjs";
 import { collection as fsColl, deleteDoc, doc as fsDoc, getDoc, getDocs, setDoc, updateDoc, onSnapshot }
     from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 import { createModalFromChange } from "../lib/util.mjs";
+import Customer from "./Customer.mjs";
 
 /**
  * Constructor function for the class Event
@@ -18,13 +19,42 @@ import { createModalFromChange } from "../lib/util.mjs";
  * @param {{id: string, title: string, description: number}} slots - Object creation slots.
  */
 class Event {
-    // record parameter with the ES6 syntax for function parameter destructuring
+// record parameter with the ES6 syntax for function parameter destructuring
     constructor({id, title, description, date, registeredCustomers}) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.date = date;
         this.registeredCustomers = registeredCustomers;
+    }
+
+    static checkId( id) {
+        id = parseFloat( id.toString());
+        if ( typeof id === "number" && !isNaN( id)) return "";
+        return "Must be a number";
+    }
+    static async checkIdAsId( id) {
+        if ( Event.checkId( id)) return Event.checkId( id);
+        if ( !await Event.retrieve( id)) return "";
+        return "Already exists";
+    }
+    static checkTitle( title) {
+        if ( typeof title === "string" && title.length > 0) return "";
+        return "Must be longer than 0";
+    }
+    static checkDescription( description) {
+        if ( typeof description === "string" && description.length > 0) return "";
+        return "Must be longer than 0";
+    }
+    static checkDate( date) {
+        date = new Date( date);
+        if ( date instanceof Date && !isNaN( date)) return "";
+        return "Invalid date";
+    }
+    static async checkRegisteredCustomers( registeredCustomers) {
+        const customers = await Promise.all( registeredCustomers.map((id) => Customer.retrieve( id)));
+        if ( customers.every((p) => !!p)) return "";
+        return "Not all customers exist";
     }
 }
 /*********************************************************
@@ -93,6 +123,7 @@ Event.update = async function (slots) {
     if (eventRec.title !== slots.title) updSlots.title = slots.title;
     if (eventRec.description !== slots.description) updSlots.description = slots.description;
     if (eventRec.date !== slots.date) updSlots.date = slots.date;
+    if (eventRec.registeredCustomers !== slots.registeredCustomers) updSlots.registeredCustomers = slots.registeredCustomers;
     if (Object.keys( updSlots).length > 0) {
         try {
             const eventDocRef = fsDoc( fsDb, "events", slots.id);
@@ -108,9 +139,16 @@ Event.update = async function (slots) {
  * @param id: {string}
  * @returns {Promise<void>}
  */
-Event.destroy = async function (id) {
+Event.destroy = async function ( id) {
     try {
         await deleteDoc( fsDoc( fsDb, "events", id));
+        const customers = await Customer.retrieveAll();
+        customers.forEach( async ( c) => {
+            if ( c.registeredEvents.includes( +id)) {
+                c.registeredEvents.splice( c.registeredEvents.indexOf( +id), 1);
+                await Customer.update( c);
+            }
+        });
         console.log(`Event record ${id} deleted.`);
     } catch( e) {
         console.error(`Error when deleting event record: ${e}`);

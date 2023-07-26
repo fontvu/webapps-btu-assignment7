@@ -6,9 +6,9 @@
 /***************************************************************
  Import classes and data types
  ***************************************************************/
-import Customer from "../m/Customer.mjs";
 import { fillSelectWithOptions } from "../lib/util.mjs";
 import { handleAuthentication } from "./accessControl.mjs";
+import Customer from "../m/Customer.mjs";
 
 /***************************************************************
  Setup and handle UI Authentication
@@ -52,6 +52,8 @@ select.addEventListener("change", async function () {
     formEl["id"].value = customer.id;
     formEl["name"].value = customer.name;
     formEl["phoneNumber"].value = customer.phoneNumber;
+    formEl["hasPurchased"].value = customer.hasPurchased;
+    formEl["registeredEvents"].value = customer.registeredEvents;
     if (cancelListener) cancelListener();
     cancelListener = Customer.observeChanges( customerId);
   } else {
@@ -67,10 +69,12 @@ submitButton.addEventListener("click", async function () {
     id: select.value,
     name: formEl["name"].value,
     phoneNumber: formEl["phoneNumber"].value,
-    hasPurchased: formEl["hasPurchased"].value.split(",")
+    hasPurchased: formEl["hasPurchased"].value.split(","),
+    registeredEvents: formEl["registeredEvents"].value.split(","),
   };
 
   formEl.hasPurchased.setCustomValidity( await Customer.checkHasPurchased( slots.hasPurchased));
+  formEl.registeredEvents.setCustomValidity( await Customer.checkRegisteredEvents( slots.hasPurchased));
   if ( formEl.checkValidity()) {
     await Customer.update( slots);
     formEl.reset();

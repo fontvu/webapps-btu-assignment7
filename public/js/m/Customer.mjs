@@ -12,6 +12,7 @@ import { collection as fsColl, deleteDoc, doc as fsDoc, getDoc, getDocs, setDoc,
   from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 import { createModalFromChange } from "../lib/util.mjs";
 import Product from "./Product.mjs";
+import Event from "./Event.mjs";
 
 /**
  * Constructor function for the class Customer
@@ -20,11 +21,12 @@ import Product from "./Product.mjs";
  */
 class Customer {
   // record parameter with the ES6 syntax for function parameter destructuring
-  constructor({id, name, phoneNumber, hasPurchased}) {
+  constructor({id, name, phoneNumber, hasPurchased, registeredEvents}) {
     this.id = id;
     this.name = name;
     this.phoneNumber = phoneNumber;
     this.hasPurchased = hasPurchased;
+    this.registeredEvents = registeredEvents;
   }
 
   static checkId( id) {
@@ -46,8 +48,13 @@ class Customer {
     return "Must be longer than 10";
   }
   static async checkHasPurchased( hasPurchased) {
-    const products = await Promise.all(hasPurchased.map((id) => Product.retrieve( id)));
+    const products = await Promise.all( hasPurchased.map((id) => Product.retrieve( id)));
     if (products.every((p) => !!p)) return "";
+    return "Not all IDs exist";
+  }
+  static async checkRegisteredEvents( registeredEvents) {
+    const events = await Promise.all( registeredEvents.map((id) => Product.retrieve( id)));
+    if (events.every((p) => !!p)) return "";
     return "Not all IDs exist";
   }
 }
@@ -117,6 +124,7 @@ Customer.update = async function (slots) {
   if (customerRec.name !== slots.name) updSlots.name = slots.name;
   if (customerRec.phoneNumber !== slots.phoneNumber) updSlots.phoneNumber = slots.phoneNumber;
   if (customerRec.hasPurchased !== slots.hasPurchased) updSlots.hasPurchased = slots.hasPurchased;
+  if (customerRec.registeredEvents !== slots.registeredEvents) updSlots.registeredEvents = slots.registeredEvents;
   if (Object.keys( updSlots).length > 0) {
     try {
       const customerDocRef = fsDoc( fsDb, "customers", slots.id);
@@ -135,6 +143,13 @@ Customer.update = async function (slots) {
 Customer.destroy = async function (id) {
   try {
     await deleteDoc( fsDoc( fsDb, "customers", id));
+    const events = await Event.retrieveAll();
+    events.forEach( async ( e) => {
+      if ( e.registeredCustomers.includes( +id)) {
+        e.registeredCustomers.splice( e.registeredCustomers.indexOf( +id), 1);
+        await Event.update( e);
+      }
+    });
     console.log(`Customer record ${id} deleted.`);
   } catch( e) {
     console.error(`Error when deleting customer record: ${e}`);

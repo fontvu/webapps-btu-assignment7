@@ -33,6 +33,7 @@
     import Customer from "./js/m/Customer.mjs";
     import Product from "./js/m/Product.mjs";
     import ProductCatalog from "./js/m/ProductCatalog.mjs";
+    import Event from "./js/m/Event.mjs";
 
     handleAuthentication();
     window.addEventListener("load", function () {
@@ -43,12 +44,14 @@
         Customer.clearData();
         Product.clearData();
         ProductCatalog.clearData();
+        Event.clearData();
       });
       for (const btn of generateTestDataButtons) {
         btn.addEventListener("click", function () {
           Customer.generateTestData();
           Product.generateTestData();
           ProductCatalog.generateTestData();
+          Event.generateTestData();
         });
       }
     });
